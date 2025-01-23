@@ -1,5 +1,0 @@
-express
-express
-mongodb
-mongoose
-nodemon
