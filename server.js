@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require(`express`);
 const bodyParser = require(`body-parser`);
 const mongoose = require(`mongoose`);
@@ -49,9 +50,7 @@ app.use("/api/goals", goalRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
 mongoose
-  .connect(
-    "mongodb+srv://nits000333:0KFToxEeJeYQToT4@backenddb.muafh.mongodb.net/Node-API?retryWrites=true&w=majority&appName=backendDB"
-  )
+  .connect(process.env.MONGODB_URL)
   .then(() => {
     console.log("Connected to database...");
     app.listen(3000, () => {
