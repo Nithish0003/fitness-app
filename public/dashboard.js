@@ -105,21 +105,21 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-  const renderTable = async (tableId, apiUrl, createRow) => {
+  const renderTable = async (tableId, baseUrl, createRow) => {
     const tableBody = document.querySelector(`${tableId} tbody`);
     tableBody.innerHTML = "";
-    const response = await fetch(`${apiUrl}?userId=${userId}`);
+    const response = await fetch(`${baseUrl}?userId=${userId}`);
     const data = await response.json();
     data.forEach((item) => tableBody.appendChild(createRow(item)));
   };
 
-  const deleteItem = async (apiUrl, id, refresh) => {
-    await fetch(`${apiUrl}/${id}`, { method: "DELETE" });
+  const deleteItem = async (baseUrl, id, refresh) => {
+    await fetch(`${baseUrl}/${id}`, { method: "DELETE" });
     refresh();
   };
 
   const updateTable = () => {
-    renderTable("#workoutsTable", "/api/workouts", (workout) => {
+    renderTable("#workoutsTable", `${baseUrl}/api/workouts`, (workout) => {
       const row = document.createElement("tr");
       row.innerHTML = `
           <td>${new Date(workout.dateOfWorkout).toLocaleDateString()}</td>
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return row;
     });
 
-    renderTable("#goalsTable", "/api/goals", (goal) => {
+    renderTable("#goalsTable", `${baseUrl}/api/goals`, (goal) => {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${goal.goalType}</td>
