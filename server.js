@@ -11,9 +11,9 @@ const app = express();
 
 // Use CORS middleware to allow requests from specific origins
 const allowedOrigins = [
-  "http://localhost:3000", // Your local frontend origin
+  "http://localhost:3000",
   "https://luminous-parfait-e2edae.netlify.app",
-  "https://fitness-app-blib.onrender.com/", // Your live frontend URL (Netlify)
+  "https://fitness-app-blib.onrender.com/",
 ];
 
 const corsOptions = {
@@ -25,15 +25,14 @@ const corsOptions = {
       callback(new Error("Not allowed by CORS"));
     }
   },
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allow these methods
+  methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
-app.options("*", cors(corsOptions)); // Handle preflight requests for all routes
+app.options("*", cors(corsOptions));
 
 app.use(cors(corsOptions));
 
-// app.use(express.json());
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
