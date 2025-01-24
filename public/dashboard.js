@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
   const userId = localStorage.getItem("userId");
-  const baseUrl = "https://fitness-app-blib.onrender.com";
+  // const baseUrl = "https://fitness-app-blib.onrender.com";
+  const baseUrl =
+    window.location.hostname === "localhost"
+      ? "http://localhost:3000"
+      : "https://fitness-app-blib.onrender.com";
 
   if (!userId) {
     alert("User not logged in!");
