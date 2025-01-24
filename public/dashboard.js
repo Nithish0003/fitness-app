@@ -1,10 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const userId = localStorage.getItem("userId");
-  // const baseUrl = "https://fitness-app-blib.onrender.com";
-  const baseUrl =
-    window.location.hostname === "localhost"
-      ? "http://localhost:3000"
-      : "https://fitness-app-blib.onrender.com";
+  const baseUrl = "https://fitness-app-blib.onrender.com";
 
   if (!userId) {
     alert("User not logged in!");
@@ -109,16 +105,16 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-  const renderTable = async (tableId, createRow) => {
+  const renderTable = async (tableId, apiUrl, createRow) => {
     const tableBody = document.querySelector(`${tableId} tbody`);
     tableBody.innerHTML = "";
-    const response = await fetch(`${baseUrl}?userId=${userId}`);
+    const response = await fetch(`${apiUrl}?userId=${userId}`);
     const data = await response.json();
     data.forEach((item) => tableBody.appendChild(createRow(item)));
   };
 
-  const deleteItem = async (id, refresh) => {
-    await fetch(`${baseUrl}/${id}`, { method: "DELETE" });
+  const deleteItem = async (apiUrl, id, refresh) => {
+    await fetch(`${apiUrl}/${id}`, { method: "DELETE" });
     refresh();
   };
 
@@ -192,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
         distanceTraveled:
           document.getElementById("editDistanceTraveled").value || null,
       };
-      await fetch(`${baseUrl}/api/workouts/${workout._id}`, {
+      await fetch(`/api/workouts/${workout._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedWorkout),
@@ -218,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentValue: document.getElementById("editCurrentValue").value || 0,
         endDate: document.getElementById("editEndDate").value,
       };
-      await fetch(`${baseUrl}/api/goals/${goal._id}`, {
+      await fetch(`/api/goals/${goal._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedGoal),
