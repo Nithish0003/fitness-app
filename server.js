@@ -2,11 +2,30 @@ const express = require(`express`);
 const bodyParser = require(`body-parser`);
 const mongoose = require(`mongoose`);
 const path = require("path");
+const cors = require(`cors`);
 const authRoutes = require("./routes/auth.routes");
 const workoutRoutes = require("./routes/workout.routes");
 const goalRoutes = require("./routes/goal.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const app = express();
+
+// Use CORS middleware to allow requests from specific origins
+const allowedOrigins = [
+  "http://localhost:3000", // Your local frontend origin
+  "https://fitness-app-blib.onrender.com/", // Your live frontend URL (Netlify)
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
 
 // app.use(express.json());
 app.use(bodyParser.json());

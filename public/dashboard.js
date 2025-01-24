@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const userId = localStorage.getItem("userId");
+  const baseUrl = "https://fitness-app-blib.onrender.com";
 
   if (!userId) {
     alert("User not logged in!");
@@ -44,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const distanceTraveled =
         document.getElementById("distanceTraveled").value;
       try {
-        const response = await fetch("http://localhost:3000/api/workouts", {
+        const response = await fetch(`${baseUrl}/api/workouts`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -78,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const currentValue = document.getElementById("currentValue").value;
       const endDate = document.getElementById("endDate").value;
       try {
-        const response = await fetch("http://localhost:3000/api/goals", {
+        const response = await fetch(`${baseUrl}/api/goals`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
