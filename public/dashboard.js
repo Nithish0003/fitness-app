@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
         distanceTraveled:
           document.getElementById("editDistanceTraveled").value || null,
       };
-      await fetch(`/api/workouts/${workout._id}`, {
+      await fetch(`${baseUrl}}/api/workouts/${workout._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedWorkout),
@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentValue: document.getElementById("editCurrentValue").value || 0,
         endDate: document.getElementById("editEndDate").value,
       };
-      await fetch(`/api/goals/${goal._id}`, {
+      await fetch(`${baseUrl}/api/goals/${goal._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedGoal),
