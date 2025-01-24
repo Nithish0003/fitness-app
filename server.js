@@ -12,7 +12,7 @@ const app = express();
 // Use CORS middleware to allow requests from specific origins
 const allowedOrigins = [
   "http://localhost:3000", // Your local frontend origin
-  "https://luminous-parfait-e2edae.netlify.app/",
+  "https://luminous-parfait-e2edae.netlify.app",
   "https://fitness-app-blib.onrender.com/", // Your live frontend URL (Netlify)
 ];
 
