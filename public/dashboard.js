@@ -109,16 +109,16 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-  const renderTable = async (tableId, apiUrl, createRow) => {
+  const renderTable = async (tableId, createRow) => {
     const tableBody = document.querySelector(`${tableId} tbody`);
     tableBody.innerHTML = "";
-    const response = await fetch(`${baseUrl}${apiUrl}?userId=${userId}`);
+    const response = await fetch(`${baseUrl}?userId=${userId}`);
     const data = await response.json();
     data.forEach((item) => tableBody.appendChild(createRow(item)));
   };
 
-  const deleteItem = async (apiUrl, id, refresh) => {
-    await fetch(`${baseUrl}${apiUrl}/${id}`, { method: "DELETE" });
+  const deleteItem = async (id, refresh) => {
+    await fetch(`${baseUrl}/${id}`, { method: "DELETE" });
     refresh();
   };
 
