@@ -19,7 +19,7 @@ document
       if (response.ok) {
         const data = await response.text();
         alert(data);
-        window.location.href = "login.html";
+        window.location.href = "index.html";
       } else {
         const error = await response.text();
         alert("Error: " + error);
