@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!userId) {
     alert("User not logged in!");
-    window.location.href = "/login.html";
+    window.location.href = "/index.html";
     return;
   }
   const addWorkoutModal = document.getElementById("addWorkoutModal");
