@@ -17,4 +17,4 @@ const authenticateToken = (req, res, next) => {
     return res.status(403).json({ message: "Invalid or expired token." });
   }
 };
-module.exports = { authenticateToken };
+module.exports = authenticateToken;
