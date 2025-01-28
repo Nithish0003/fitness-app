@@ -235,6 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   document.getElementById("logoutBtn").addEventListener("click", () => {
     localStorage.removeItem("userId");
+    history.replaceState(null, "", "/index.html");
     window.location.href = "/index.html";
   });
 });
