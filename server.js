@@ -45,8 +45,8 @@ app.get("/", (req, res) => {
 app.use(express.static(path.join(__dirname, "public")));
 
 // getting routes
-// app.use("/api", authRoutes);
-app.use("/api/auth", authRoutes);
+app.use("/api", authRoutes);
+// app.use("/api/auth", authRoutes);
 app.use("/api/workoutS", workoutRoutes);
 app.use("/api/goals", goalRoutes);
 app.use("/api/dashboard", authToken, dashboardRoutes);
@@ -56,13 +56,12 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: "Something went wrong!" });
 });
 
-app.use((req, res, next) => {
-  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
-  res.setHeader("Pragma", "no-cache");
-  res.setHeader("Expires", "0");
-  next();
-});
-
+// app.use((req, res, next) => {
+//   res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
+//   res.setHeader("Pragma", "no-cache");
+//   res.setHeader("Expires", "0");
+//   next();
+// });
 
 mongoose
   .connect(process.env.MONGODB_URL)
