@@ -237,5 +237,8 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("userId");
     history.replaceState(null, "", "/index.html");
     window.location.href = "/index.html";
+    setTimeout(() => {
+      history.pushState(null, "", "/index.html");
+    }, 100);
   });
 });
