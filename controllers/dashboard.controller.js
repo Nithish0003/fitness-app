@@ -3,7 +3,7 @@ const Goal = require("../models/goals.model");
 
 const dashboard = async (req, res) => {
   try {
-    const userId = req.user.userId;
+    const { userId } = req.user;
     const workouts = await Workout.find({ userId });
     const goals = await Goal.find({ userId });
     res.status(200).json({ workouts, goals });
