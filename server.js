@@ -8,7 +8,6 @@ const authRoutes = require("./routes/auth.routes");
 const workoutRoutes = require("./routes/workout.routes");
 const goalRoutes = require("./routes/goal.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
-const authToken = require("./middleware/authToken");
 const app = express();
 
 // Use CORS middleware to allow requests from specific origins
@@ -46,22 +45,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // getting routes
 app.use("/api", authRoutes);
-// app.use("/api/auth", authRoutes);
 app.use("/api/workoutS", workoutRoutes);
 app.use("/api/goals", goalRoutes);
-app.use("/api/dashboard", authToken, dashboardRoutes);
-
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: "Something went wrong!" });
-});
-
-// app.use((req, res, next) => {
-//   res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
-//   res.setHeader("Pragma", "no-cache");
-//   res.setHeader("Expires", "0");
-//   next();
-// });
+app.use("/api/dashboard", dashboardRoutes);
 
 mongoose
   .connect(process.env.MONGODB_URL)
