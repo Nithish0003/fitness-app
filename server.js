@@ -39,8 +39,8 @@ app.use(bodyParser.json());
 
 // Rate limit rule
 const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 20, // max 10 request per ip
+  windowMs: 2 * 60 * 1000, // 2 minutes
+  max: 100, // max 100 request per ip
   message: "Too many requests from this IP, please try again after an hour",
 });
 
