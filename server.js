@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require(`express`);
 const bodyParser = require(`body-parser`);
 const mongoose = require(`mongoose`);
+const rateLimit = require(`express-rate-limit`);
 const path = require("path");
 const cors = require(`cors`);
 const authRoutes = require("./routes/auth.routes");
@@ -35,6 +36,15 @@ app.options("*", cors(corsOptions));
 app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
+
+// Rate limit rule
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 20, // max 10 request per ip
+  message: "Too many requests from this IP, please try again after an hour",
+});
+
+app.use("/api/", apiLimiter);
 
 app.get("/", (req, res) => {
   res.send("hello form node-api");
