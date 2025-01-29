@@ -37,7 +37,8 @@ app.options("*", cors(corsOptions));
 
 app.use(cors(corsOptions));
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "1kb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "1kb" }));
 
 // Helmet to set various HTTP headers for security
 app.use(helmet());
