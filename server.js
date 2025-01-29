@@ -37,6 +37,9 @@ app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
+// Trust the first proxy
+app.set("trust proxy", 1);
+
 // Rate limit rule
 const apiLimiter = rateLimit({
   windowMs: 2 * 60 * 1000, // 2 minutes
@@ -45,6 +48,10 @@ const apiLimiter = rateLimit({
 });
 
 app.use("/api/", apiLimiter);
+
+app.get("/api/resource", (req, res) => {
+  res.json({ message: "Accessed the resource!" });
+});
 
 app.get("/", (req, res) => {
   res.send("hello form node-api");
