@@ -5,6 +5,8 @@ const mongoose = require(`mongoose`);
 const rateLimit = require(`express-rate-limit`);
 const path = require("path");
 const cors = require(`cors`);
+const helmet = require(`helmet`);
+const xss = require(`express-xss-sanitizer`);
 const authRoutes = require("./routes/auth.routes");
 const workoutRoutes = require("./routes/workout.routes");
 const goalRoutes = require("./routes/goal.routes");
@@ -36,6 +38,17 @@ app.options("*", cors(corsOptions));
 app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
+
+// Helmet to set various HTTP headers for security
+app.use(helmet());
+
+// express-xss-sanitizer middleware to sanitize user inputs
+app.use(xss());
+
+// custom input sanitization function
+const sanitizeInput = (input) => {
+  return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+};
 
 // Trust the first proxy
 app.set("trust proxy", 1);
